@@ -1,0 +1,73 @@
+<div class="form-container">
+  <h2>Cadastro Escolar 2026</h2>
+  
+  <form #cadastroForm="ngForm" (ngSubmit)="onSubmit(cadastroForm)">
+
+    <div class="form-group">
+      <label for="nome">Nome Completo do Aluno *</label>
+      <input type="text" id="nome" name="nomeCompleto" [(ngModel)]="aluno.nomeCompleto" required>
+    </div>
+
+    <div class="form-group">
+      <label for="nascimento">Data de Nascimento *</label>
+      <input type="date" id="nascimento" name="dataNascimento" [(ngModel)]="aluno.dataNascimento" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">E-mail de Contato *</label>
+      <input type="email" id="email" name="emailContato" [(ngModel)]="aluno.emailContato" required email>
+    </div>
+
+    <div class="form-group">
+      <label for="senha">Senha do Portal do Aluno *</label>
+      <input type="password" id="senha" name="senhaPortal" [(ngModel)]="aluno.senhaPortal" required minlength="6">
+    </div>
+
+    <div class="form-group">
+      <label for="serie">Série/Ano *</label>
+      <select id="serie" name="serie" [(ngModel)]="aluno.serie" required>
+        <option value="" disabled>Selecione a série</option>
+        <option *ngFor="let s of opcoesSerie" [value]="s">{{ s }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Turno *</label>
+      <div>
+        <label>
+          <input type="radio" name="turno" value="Manhã" [(ngModel)]="aluno.turno" required> Manhã
+        </label>
+        <label>
+          <input type="radio" name="turno" value="Tarde" [(ngModel)]="aluno.turno" required> Tarde
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <input type="checkbox" name="necessidadeEspecial" [(ngModel)]="aluno.necessidadeEspecial">
+        O aluno possui alguma necessidade educacional especial?
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label for="responsavel">Nome Completo do Responsável *</label>
+      <input type="text" id="responsavel" name="nomeResponsavel" [(ngModel)]="aluno.nomeResponsavel" required>
+    </div>
+
+    <div class="form-group">
+      <label for="telefone">Telefone de Contato *</label>
+      <input type="tel" id="telefone" name="telefoneContato" [(ngModel)]="aluno.telefoneContato" required>
+    </div>
+
+    <div class="form-group termos">
+      <label>
+        <input type="checkbox" name="aceiteTermos" [(ngModel)]="aluno.aceiteTermos" required>
+        Declaro que li e aceito os termos do regimento escolar. *
+      </label>
+    </div>
+
+    <button type="submit" [disabled]="!cadastroForm.valid">Realizar Matrícula</button>
+
+  </form>
+</div>
