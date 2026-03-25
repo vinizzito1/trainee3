@@ -1,0 +1,96 @@
+<div class="form-container">
+  <h2>Cadastro Escolar Reativo</h2>
+  
+  <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label>Nome Completo *</label>
+      <input type="text" formControlName="nomeCompleto">
+    </div>
+
+    <div class="form-group">
+      <label>Data de Nascimento *</label>
+      <input type="date" formControlName="dataNascimento">
+    </div>
+
+    <div class="form-group">
+      <label>E-mail *</label>
+      <input type="email" formControlName="emailContato">
+    </div>
+
+    <div class="form-group">
+      <label>Senha *</label>
+      <input type="password" formControlName="senhaPortal">
+    </div>
+
+    <div class="form-group">
+      <label>Série/Ano *</label>
+      <select formControlName="serie">
+        <option value="" disabled>Selecione a série</option>
+        <option *ngFor="let s of opcoesSerie" [value]="s">{{ s }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Turno *</label>
+      <div>
+        <label><input type="radio" value="Manhã" formControlName="turno"> Manhã</label>
+        <label><input type="radio" value="Tarde" formControlName="turno"> Tarde</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <input type="checkbox" formControlName="necessidadeEspecial"> Possui necessidade especial?
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>Responsável *</label>
+      <input type="text" formControlName="nomeResponsavel">
+    </div>
+
+    <div class="form-group">
+      <label>Telefone *</label>
+      <input type="tel" formControlName="telefoneContato">
+    </div>
+
+    <div class="form-group" formArrayName="atividadesExtracurriculares">
+      <h3>Atividades Extracurriculares</h3>
+      <p>Adicione esportes, cursos de idioma, etc.</p>
+      
+      <div *ngFor="let atividade of atividades.controls; let i=index" style="margin-bottom: 5px;">
+        <input type="text" [formControlName]="i" placeholder="Ex: Judô">
+        <button type="button" (click)="removerAtividade(i)">X</button>
+      </div>
+      
+      <button type="button" (click)="adicionarAtividade()">+ Adicionar Atividade</button>
+    </div>
+
+    <div class="form-group" formGroupName="documentos">
+      <h3>Checklist de Documentos</h3>
+      
+      <div *ngFor="let doc of documentosRecord.controls | keyvalue">
+        <label>
+          <input type="checkbox" [formControlName]="doc.key"> {{ doc.key }}
+        </label>
+      </div>
+      
+      <div style="margin-top: 10px;">
+        <input type="text" #novoDoc placeholder="Nome de outro documento">
+        <button type="button" (click)="adicionarNovoDocumento(novoDoc.value); novoDoc.value=''">
+          Adicionar à lista
+        </button>
+      </div>
+    </div>
+
+    <div class="form-group termos">
+      <label>
+        <input type="checkbox" formControlName="aceiteTermos"> Aceito os termos *
+      </label>
+    </div>
+
+    <button type="submit" [disabled]="!cadastroForm.valid">Realizar Matrícula Reativa</button>
+
+  </form>
+</div>
