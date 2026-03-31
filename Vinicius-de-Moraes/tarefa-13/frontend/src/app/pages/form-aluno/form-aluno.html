@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>{{ alunoId ? 'Editar Aluno' : 'Novo Aluno' }}</h2>
+</div>
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <form [formGroup]="alunoForm" (ngSubmit)="salvar()">
+      
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <label class="form-label">Nome Completo</label>
+          <input type="text" class="form-control" formControlName="nome" placeholder="Ex: João da Silva">
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Matrícula</label>
+          <input type="text" class="form-control" formControlName="matricula" placeholder="Ex: 2026001">
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Turma</label>
+          <input type="text" class="form-control" formControlName="turma" placeholder="Ex: 3º Ano B">
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Notas</label>
+          <input type="text" class="form-control" formControlName="notasStr" placeholder="Ex: 8.5, 9.0, 10">
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end mt-4">
+        <button type="button" class="btn btn-secondary me-2" routerLink="/alunos">Cancelar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="alunoForm.invalid">Salvar Aluno</button>
+      </div>
+
+    </form>
+  </div>
+</div>

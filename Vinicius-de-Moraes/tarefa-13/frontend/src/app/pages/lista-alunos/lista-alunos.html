@@ -1,0 +1,47 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Alunos Matriculados</h2>
+    <button routerLink="/alunos/novo" class="btn btn-primary">
+        Adicionar Aluno
+    </button>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Nome</th>
+                    <th>Matrícula</th>
+                    <th>Turma</th>
+                    <th>Média</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (aluno of alunos; track aluno.id) {
+                    <tr>
+                        <td>{{ aluno.nome }}</td>
+                        <td>{{ aluno.matricula }}</td>
+                        <td>{{ aluno.turma }}</td>
+                        <td>{{ calcularMedia(aluno.notas) }}
+                        </td>
+                        <td class="text-center">
+                            <button [routerLink]="['/alunos/editar', aluno.id]" class="btn btn-sm btn-outline-warning me-2">
+                                Editar
+                            </button>
+                            <button (click)="excluir(aluno.id!)" class="btn btn-sm btn-outline-danger">
+                                Excluir
+                            </button>
+                        </td>
+                    </tr>
+                    } @empty {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">
+                            Nenhum aluno cadastrado no sistema.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
